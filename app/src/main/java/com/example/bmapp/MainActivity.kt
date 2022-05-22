@@ -13,12 +13,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.bmapp.ui.theme.BMAppTheme
+import com.example.bmapp.data.categoryList
+
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -64,19 +65,6 @@ fun Header() {
         )
     }
 }
-
-data class Category(val imageID: Int, val name: String)
-
-const val truckImageID = R.drawable.categoryplaceholder
-
-val categoryList = listOf<Category>(
-    Category(truckImageID, "Pickup"),
-    Category(truckImageID, "Covered"),
-    Category(truckImageID, "Cement"),
-    Category(truckImageID, "Freezer"),
-    Category(truckImageID, "Trailer"),
-    Category(truckImageID, "Crane")
-)
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
