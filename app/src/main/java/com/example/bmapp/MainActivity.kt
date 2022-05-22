@@ -65,22 +65,22 @@ fun Header() {
     }
 }
 
-data class Category(val image: Painter, val name: String)
+data class Category(val imageID: Int, val name: String)
+
+const val truckImageID = R.drawable.categoryplaceholder
+
+val categoryList = listOf<Category>(
+    Category(truckImageID, "Pickup"),
+    Category(truckImageID, "Covered"),
+    Category(truckImageID, "Cement"),
+    Category(truckImageID, "Freezer"),
+    Category(truckImageID, "Trailer"),
+    Category(truckImageID, "Crane")
+)
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun Categories() {
-    val truckImage = painterResource(id = R.drawable.categoryplaceholder)
-
-    val categoryList = listOf<Category>(
-        Category(truckImage, "Pickup"),
-        Category(truckImage, "Covered"),
-        Category(truckImage, "Cement"),
-        Category(truckImage, "Freezer"),
-        Category(truckImage, "Trailer"),
-        Category(truckImage, "Crane")
-    )
-
     LazyVerticalGrid(
         cells = GridCells.Adaptive(minSize = 144.dp),
         horizontalArrangement = Arrangement.spacedBy(16.dp),
@@ -102,7 +102,9 @@ fun Categories() {
                     )
                 ) {
                     Image(
-                        painter = categoryList[index].image,
+                        painter = painterResource(
+                            id = categoryList[index].imageID
+                        ),
                         contentDescription = "hih",
                         modifier = Modifier.size(64.dp)
                     )
