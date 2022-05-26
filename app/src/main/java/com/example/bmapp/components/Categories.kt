@@ -15,41 +15,51 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import com.example.bmapp.data.categoryList
+
+fun handleClick(navController: NavController, categoryIndex: Int) {
+    navController.navigate(
+        route = "services?categoryName=${
+            categoryList[categoryIndex].name
+        }"
+    )
+}
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun Categories() {
+fun Categories(navController: NavController) {
     LazyVerticalGrid(
         cells = GridCells.Adaptive(minSize = 144.dp),
         horizontalArrangement = Arrangement.spacedBy(16.dp),
         verticalArrangement = Arrangement.spacedBy(16.dp),
         contentPadding = PaddingValues(24.dp)
     ) {
-        items(6) { index ->
+        items(6) { idx ->
             OutlinedButton(
-                onClick = {},
-                colors = ButtonDefaults.outlinedButtonColors(
+                onClick = {
+                    handleClick(
+                        navController = navController, categoryIndex = idx
+                    )
+                }, colors = ButtonDefaults.outlinedButtonColors(
                     backgroundColor = Color(0xeeeeeeff)
                 )
             ) {
                 Column(
                     horizontalAlignment = Alignment.CenterHorizontally,
                     modifier = Modifier.padding(
-                        horizontal = 10.dp,
-                        vertical = 8.dp
+                        horizontal = 10.dp, vertical = 8.dp
                     )
                 ) {
                     Image(
                         painter = painterResource(
-                            id = categoryList[index].imageID
+                            id = categoryList[idx].image.id
                         ),
-                        contentDescription = "hih",
+                        contentDescription = categoryList[idx].image.desc,
                         modifier = Modifier.size(64.dp)
                     )
                     Text(
-                        text = categoryList[index].name,
-                        fontSize = 24.sp
+                        text = categoryList[idx].name, fontSize = 24.sp
                     )
                 }
 

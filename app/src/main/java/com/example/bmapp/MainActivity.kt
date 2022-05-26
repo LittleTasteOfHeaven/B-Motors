@@ -9,7 +9,6 @@ import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.example.bmapp.screens.Home
 import com.example.bmapp.ui.theme.BMAppTheme
 
 class MainActivity : ComponentActivity() {
@@ -32,7 +31,7 @@ class MainActivity : ComponentActivity() {
 @Preview(showBackground = true)
 @Composable
 fun DefaultPreview() {
-    BMAppTheme() {
-        Home()
+    BMAppTheme {
+        App()
     }
 }
