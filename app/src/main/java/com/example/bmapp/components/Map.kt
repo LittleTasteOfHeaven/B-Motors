@@ -1,15 +1,11 @@
 package com.example.bmapp.components
 
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.Text
-import androidx.compose.material.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -24,13 +20,13 @@ import com.google.maps.android.compose.rememberCameraPositionState
 @Preview(showBackground = true)
 @Composable
 fun GoogleMapView() {
-    val apiKey = "AIzaSyBLJMB5z1WKH08FAVE5Nj_ZcmBEbVQZ_2E"
+    val apiKey = ""
     val context = LocalContext.current
-    
+
     Places.initialize(context, apiKey)
 
     val placesClient = Places.createClient(context)
-    
+
     var field = listOf(Place.Field.NAME, Place.Field.ADDRESS)
 
     val singapore = LatLng(1.35, 103.87)
