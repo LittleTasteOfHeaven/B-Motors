@@ -21,7 +21,7 @@ import com.example.bmapp.data.categoryList
 fun handleClick(navController: NavController, categoryIndex: Int) {
     navController.navigate(
         route = "services?categoryName=${
-            categoryList[categoryIndex].name
+        categoryList[categoryIndex].name
         }"
     )
 }
@@ -41,7 +41,8 @@ fun Categories(navController: NavController) {
                     handleClick(
                         navController = navController, categoryIndex = idx
                     )
-                }, colors = ButtonDefaults.outlinedButtonColors(
+                },
+                colors = ButtonDefaults.outlinedButtonColors(
                     backgroundColor = Color(0xeeeeeeff)
                 )
             ) {
@@ -62,7 +63,6 @@ fun Categories(navController: NavController) {
                         text = categoryList[idx].name, fontSize = 24.sp
                     )
                 }
-
             }
         }
     }
