@@ -1,7 +1,7 @@
 package com.example.bmapp.screens
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.* // ktlint-disable no-wildcard-imports
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -11,6 +11,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
@@ -48,27 +49,33 @@ fun Service(navController: NavController, categoryName: String) {
     }
 
     Column(
-        modifier = Modifier.fillMaxWidth(),
-        horizontalAlignment = Alignment.CenterHorizontally
+        modifier = Modifier.fillMaxWidth().padding(16.dp),
+        verticalArrangement = Arrangement.spacedBy(16.dp),
     ) {
         Text(
             text = "$categoryName Vehicle",
             fontSize = 30.sp,
         )
-        OutlinedButton(onClick = {}) {
-            Text(text = "Select Location with Maps")
-        }
-        TextField(value = phoneSt, onValueChange = {}, label = {
-            Text(
-                text = "Phone Number"
-            )
-        })
+        OutlinedTextField(
+            value = phoneSt, onValueChange = {}, label = {
+                Text(
+                    text = "Phone Number"
+                )
+            }, modifier = Modifier.fillMaxWidth()
+        )
 
         when (verifiedSt) {
             true -> {}
             false -> {
-                OutlinedButton(onClick = { setVerifyPhoneCardSt(true) }) {
-                    Text(text = "Verify")
+                Button(
+                    onClick = { setVerifyPhoneCardSt(true) },
+                    modifier = Modifier.fillMaxWidth(),
+                    contentPadding = PaddingValues(16.dp)
+                ) {
+                    Text(
+                        text = "Verify",
+                        fontSize = 16.sp
+                    )
                 }
             }
         }
@@ -76,36 +83,71 @@ fun Service(navController: NavController, categoryName: String) {
 
     when (verifyPhoneCardSt) {
         true -> {
-            Dialog(onDismissRequest = { setVerifyPhoneCardSt(false) }) {
-                Column(
-                    horizontalAlignment = Alignment.CenterHorizontally,
-                    modifier = Modifier
-                        .background(color = Color(0xFFF5F5F5))
-                        .padding(15.dp)
+            Dialog(
+                onDismissRequest = { setVerifyPhoneCardSt(false) }
+            ) {
+                Card(
+                    shape = RoundedCornerShape(4.dp),
+                    backgroundColor = Color.White,
                 ) {
-                    Text(text = "Enter the otp sent to your phone number $phoneSt")
-                    TextField(
-                        value = otpSt,
-                        onValueChange = { setOtpSt(it) },
-                        label = {
-                            Text(
-                                text = "OTP"
-                            )
-                        }
-                    )
-                    Row(
-                        modifier = Modifier.fillMaxWidth(),
-                        horizontalArrangement = Arrangement.spacedBy(
-                            10.dp,
-                            alignment = Alignment.End
-                        )
+                    Column(
+                        horizontalAlignment = Alignment.CenterHorizontally,
+                        verticalArrangement = Arrangement.spacedBy(16.dp),
+                        modifier = Modifier.padding(24.dp, 16.dp)
                     ) {
+                        Text(
+                            text = "Enter the otp sent to your phone number",
+                            fontSize = 20.sp,
+                            textAlign = TextAlign.Center,
+                            modifier = Modifier.fillMaxWidth()
+                        )
+                        OutlinedTextField(
+                            value = otpSt,
+                            onValueChange = { setOtpSt(it) },
+                            label = {
+                                Text(
+                                    text = "OTP"
+                                )
+                            },
+                            modifier = Modifier.fillMaxWidth()
 
-                        Button(onClick = { /*TODO*/ }) {
-                            Text(text = "Verify")
-                        }
-                        Button(onClick = { setVerifyPhoneCardSt(false) }) {
-                            Text(text = "Cancel")
+                        )
+                        Row(
+                            modifier = Modifier.fillMaxWidth()
+                                .padding(0.dp, 4.dp),
+                            horizontalArrangement = Arrangement.spacedBy(
+                                12.dp, alignment = Alignment.End
+                            )
+                        ) {
+                            Button(
+                                onClick = {
+                                    setVerifyPhoneCardSt(false)
+                                    setOtpSt("")
+                                },
+                                colors = ButtonDefaults.buttonColors(
+                                    backgroundColor = MaterialTheme.colors.error,
+                                    contentColor = MaterialTheme.colors.onError
+                                ),
+                                contentPadding = PaddingValues(16.dp, 10.dp)
+                            ) {
+                                Text(
+                                    text = "Cancel",
+                                    fontSize = 16.sp
+                                )
+                            }
+                            Button(
+                                onClick = { /*TODO*/ },
+                                colors = ButtonDefaults.buttonColors(
+                                    backgroundColor = MaterialTheme.colors.primary,
+                                    contentColor = MaterialTheme.colors.onPrimary
+                                ),
+                                contentPadding = PaddingValues(16.dp, 10.dp)
+                            ) {
+                                Text(
+                                    text = "Verify",
+                                    fontSize = 16.sp
+                                )
+                            }
                         }
                     }
                 }
